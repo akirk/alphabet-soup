@@ -9,7 +9,7 @@
 			"Games"
 		]
 	},
-	"landingPage": "/alphabet-soup/",
+	"landingPage": "/wp-admin/index.php?desktop_mode_portal=1",
 	"steps": [
 		{
 			"step": "installPlugin",
