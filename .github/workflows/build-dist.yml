@@ -80,7 +80,7 @@ jobs:
         run: |
           php -r '
           $dist_ref = getenv("DIST_REF");
-          foreach (["blueprint.json", "demo.json"] as $path) {
+          foreach (["blueprint.json", "blueprint-openstation.json", "demo.json"] as $path) {
               if (!is_file($path)) {
                   continue;
               }
@@ -105,6 +105,9 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add "${PLUGIN_FILE}"
           git add blueprint.json
+          if [ -f blueprint-openstation.json ]; then
+            git add blueprint-openstation.json
+          fi
           if [ -f demo.json ]; then
             git add demo.json
           fi
