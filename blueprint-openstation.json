@@ -1,38 +1,38 @@
 {
-	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
-	"meta": {
-		"title": "Alphabet Soup",
-		"description": "A word-guessing WordPress app with a leaderboard, powered by WpApp.",
-		"author": "Alex Kirk",
-		"categories": [
-			"Apps",
-			"Games"
-		]
-	},
-	"landingPage": "/wp-admin/index.php?desktop_mode_portal=1",
-	"steps": [
-		{
-			"step": "installPlugin",
-			"pluginData": {
-				"resource": "url",
-				"url": "https://github.com/WordPress/openstation/releases/latest/download/openstation.zip"
-			},
-			"options": {
-				"activate": true
-			}
-		},
-		{
-			"step": "installPlugin",
-			"pluginData": {
-				"resource": "git:directory",
-				"url": "https://github.com/akirk/alphabet-soup",
-				"ref": "dist/main",
-				"refType": "branch"
-			},
-			"options": {
-				"activate": true,
-				"targetFolderName": "alphabet-soup"
-			}
-		}
-	]
+    "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+    "meta": {
+        "title": "Alphabet Soup",
+        "description": "A word-guessing WordPress app with a leaderboard, powered by WpApp.",
+        "author": "Alex Kirk",
+        "categories": [
+            "Apps",
+            "Games"
+        ]
+    },
+    "landingPage": "/wp-admin/index.php?desktop_mode_portal=1",
+    "steps": [
+        {
+            "step": "installPlugin",
+            "pluginData": {
+                "resource": "url",
+                "url": "https://github.com/WordPress/openstation/releases/latest/download/openstation.zip"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+            "step": "installPlugin",
+            "pluginData": {
+                "resource": "git:directory",
+                "url": "https://github.com/akirk/alphabet-soup",
+                "ref": "dist/name-the-app-scope-when-enqueueing",
+                "refType": "branch"
+            },
+            "options": {
+                "activate": true,
+                "targetFolderName": "alphabet-soup"
+            }
+        }
+    ]
 }
