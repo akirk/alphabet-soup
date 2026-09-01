@@ -66,7 +66,8 @@ class App extends BaseApp {
 			'alphabet-soup',
 			plugins_url( 'assets/css/alphabet-soup.css', dirname( __FILE__ ) ),
 			[],
-			'1.0.0'
+			'1.0.0',
+			$this->get_url_path()
 		);
 
 		if ( 'leaderboard' === trim( (string) get_query_var( 'wp_app_request' ), '/' ) ) {
@@ -91,7 +92,8 @@ class App extends BaseApp {
 				'currentUser' => $current_user,
 				'loginUrl'    => wp_login_url( home_url( '/alphabet-soup/' ) ),
 			] ) . ';',
-			true
+			true,
+			$this->get_url_path()
 		);
 
 		wp_app_enqueue_script(
@@ -99,7 +101,8 @@ class App extends BaseApp {
 			plugins_url( 'assets/js/alphabet-soup.js', dirname( __FILE__ ) ),
 			[],
 			'1.0.0',
-			true
+			true,
+			$this->get_url_path()
 		);
 	}
 
