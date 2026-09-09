@@ -1,28 +1,28 @@
 {
-	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
-	"meta": {
-		"title": "Alphabet Soup",
-		"description": "A word-guessing WordPress app with a leaderboard, powered by WpApp.",
-		"author": "Alex Kirk",
-		"categories": [
-			"Apps",
-			"Games"
-		]
-	},
-	"landingPage": "/alphabet-soup",
-	"steps": [
-		{
-			"step": "installPlugin",
-			"pluginData": {
-				"resource": "git:directory",
-				"url": "https://github.com/akirk/alphabet-soup",
-				"ref": "dist/main",
-				"refType": "branch"
-			},
-			"options": {
-				"activate": true,
-				"targetFolderName": "alphabet-soup"
-			}
-		}
-	]
+    "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+    "meta": {
+        "title": "Alphabet Soup",
+        "description": "A word-guessing WordPress app with a leaderboard, powered by WpApp.",
+        "author": "Alex Kirk",
+        "categories": [
+            "Apps",
+            "Games"
+        ]
+    },
+    "landingPage": "/alphabet-soup",
+    "steps": [
+        {
+            "step": "installPlugin",
+            "pluginData": {
+                "resource": "git:directory",
+                "url": "https://github.com/akirk/alphabet-soup",
+                "ref": "dist/codex/build-dist-fork-pr-previews",
+                "refType": "branch"
+            },
+            "options": {
+                "activate": true,
+                "targetFolderName": "alphabet-soup"
+            }
+        }
+    ]
 }
