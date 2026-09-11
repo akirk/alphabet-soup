@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Alphabet Soup
  * Description: A WordPress app powered by WpApp.
- * Version: 1.0.0
+ * Version: 1.0.0+fb2a68a9bb19
  * Author: Alex Kirk (Dani López)
  * Text Domain: alphabet-soup
  * Requires PHP: 7.4
