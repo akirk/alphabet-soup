@@ -176,7 +176,7 @@ class App extends BaseApp {
 
 	public function rest_submit_score( \WP_REST_Request $request ) {
 		$id = $this->storage->save_score(
-			get_current_user_id(),
+			(int) $request->get_param( 'user_id' ),
 			(int) $request->get_param( 'score' ),
 			(array) $request->get_param( 'meta' )
 		);
