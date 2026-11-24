@@ -33,7 +33,14 @@ jobs:
         with:
           php-version: '8.2'
           extensions: mysqli, mbstring
-          tools: composer, wp-cli
+          tools: composer
+      - name: Install WP-CLI in the runner temporary directory
+        run: |
+          mkdir -p "$RUNNER_TEMP/alphabet-soup-bin"
+          curl --fail --location --retry 3 --output "$RUNNER_TEMP/alphabet-soup-bin/wp" https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x "$RUNNER_TEMP/alphabet-soup-bin/wp"
+          "$RUNNER_TEMP/alphabet-soup-bin/wp" --version
+          echo "$RUNNER_TEMP/alphabet-soup-bin" >> "$GITHUB_PATH"
       - name: Install production dependencies
         run: composer install --no-dev --prefer-dist --no-interaction --no-plugins --no-scripts
       - name: Create runner-local WordPress
