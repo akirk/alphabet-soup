@@ -1,0 +1,4 @@
+# Keep development-only tests and Git metadata out of installable source archives.
+.gitattributes export-ignore
+.github export-ignore
+tests export-ignore
