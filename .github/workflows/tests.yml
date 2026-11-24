@@ -1,0 +1,52 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  scores:
+    name: Real WordPress score REST behavior
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: wordpress
+          MYSQL_DATABASE: alphabet_soup_tests
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mysqladmin ping --password=wordpress"
+          --health-interval=10s --health-timeout=5s --health-retries=10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mysqli, mbstring
+          tools: composer, wp-cli
+      - name: Install production dependencies
+        run: composer install --no-dev --prefer-dist --no-interaction --no-plugins --no-scripts
+      - name: Create runner-local WordPress
+        env:
+          WP_PATH: ${{ runner.temp }}/wordpress
+        run: |
+          wp core download --path="$WP_PATH"
+          wp config create --path="$WP_PATH" --dbname=alphabet_soup_tests --dbuser=root --dbpass=wordpress --dbhost=127.0.0.1
+          wp core install --path="$WP_PATH" --url=http://alphabet-soup.test --title=Scores --admin_user=admin --admin_password=ci-only-password --admin_email=admin@example.test --skip-email
+          ln -s "$GITHUB_WORKSPACE" "$WP_PATH/wp-content/plugins/alphabet-soup"
+          wp plugin activate alphabet-soup --path="$WP_PATH"
+      - name: Run score API regressions
+        env:
+          WP_PATH: ${{ runner.temp }}/wordpress
+          ALPHABET_SOUP_TESTS: '1'
+        run: wp --path="$WP_PATH" --url=http://alphabet-soup.test eval-file "$GITHUB_WORKSPACE/tests/scores.php"
